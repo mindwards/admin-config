@@ -202,7 +202,7 @@ class ReadQueries extends Queries {
      *
      * @returns {Promise}
      */
-    getAllReferencedData(references, search) {
+    getAllReferencedData(references, search, entry) {
         if (!references || !Object.keys(references).length) {
             return this._promisesResolver.empty({});
         }
@@ -226,7 +226,7 @@ class ReadQueries extends Queries {
                 // remote complete situation
                 let options = reference.remoteCompleteOptions();
                 if (options.searchQuery) {
-                    let filterValuesFromRemoteComplete = options.searchQuery(search);
+                    let filterValuesFromRemoteComplete = options.searchQuery(search, entry);
                     Object.keys(filterValuesFromRemoteComplete).forEach(key => {
                         filterValues[key] = filterValuesFromRemoteComplete[key];
                     })

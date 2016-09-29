@@ -22,6 +22,16 @@ class Field {
         this.list = true;
         this._template = () => '';
         this._templateIncludesLabel = false;
+        this._scopeCallback = null;
+    }
+
+    scopeCallback() {
+        if (arguments.length) {
+            this._scopeCallback = arguments[0];
+            return this;
+        }
+
+        return this._scopeCallback;
     }
 
     label() {
