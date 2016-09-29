@@ -23,6 +23,16 @@ class Field {
         this._template = () => '';
         this._templateIncludesLabel = false;
         this._scopeCallback = null;
+        this._rawPlaceholder = null;
+    }
+
+    rawPlaceholder() {
+        if (arguments.length) {
+            this._rawPlaceholder = arguments[0];
+            return this;
+        }
+
+        return this._rawPlaceholder;
     }
 
     scopeCallback() {
