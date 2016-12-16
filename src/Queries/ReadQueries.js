@@ -96,11 +96,19 @@ class ReadQueries extends Queries {
 
         // Compute filtering
         if (filterValues && Object.keys(filterValues).length !== 0) {
+
+            console.log('COMPUTING FILTERING');
+
             params._filters = {};
             let filterName, mappedValue;
             for (filterName in filterValues) {
+
+
+                const val = typeof filterValues[filterName] === 'function' ? filterValues[filterName]() : filterValues[filterName];
+
+
                 if (filterFields.hasOwnProperty(filterName) && filterFields[filterName].hasMaps()) {
-                    mappedValue = filterFields[filterName].getMappedValue(filterValues[filterName]);
+                    mappedValue = filterFields[filterName].getMappedValue(val);
                     Object.keys(mappedValue).forEach(key => {
                         params._filters[key] = mappedValue[key];
                     })
@@ -108,7 +116,7 @@ class ReadQueries extends Queries {
                 }
 
                 // It's weird to not map, but why not.
-                params._filters[filterName] = filterValues[filterName];
+                params._filters[filterName] = val;
             }
         }
 
