@@ -1,6 +1,6 @@
 {
   "name": "mindwards-admin-config",
-  "version": "0.13.3",
+  "version": "0.13.6",
   "private": false,
   "files": [
       "*.md",

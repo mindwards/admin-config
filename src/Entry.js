@@ -20,7 +20,15 @@ class Entry {
     static createForFields(fields, entityName) {
         let entry = new Entry(entityName);
         fields.forEach(field => {
-            entry.values[field.name()] = field.defaultValue();
+
+            var dv = field.defaultValue();
+
+            if (dv && typeof dv === 'function') {
+                dv = dv(entry);
+            }
+
+            entry.values[field.name()] = dv;
+
         });
         return entry;
 
